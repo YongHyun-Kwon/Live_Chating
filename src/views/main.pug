@@ -4,7 +4,8 @@ html
     doby 
         h1.bg-gradient-to-r.bg.from-purple-100.to-gray-200.p-16.text-4xl.font-bold My Chating Servies
         div.p-16.space-y-8
-            div.bg-gray-100.p-2 Chat list 
-            form.space-x-4.flex
-             input.flex-1.border.border-gray-200.p-4.rounded(placeholder="Please enter the chat")
-             button.bg-purple-200.p-2.rounded Send
+            div#chats.bg-gray-100.p-2 Chat list 
+            form#form.space-x-4.flex
+             input#input.flex-1.border.border-gray-200.p-4.rounded(placeholder="Please enter the chat")
+             button#send.bg-purple-200.p-2.rounded Send
+        script(src="/public/client.js") 
