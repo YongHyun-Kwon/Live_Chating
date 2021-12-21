@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noUncheckedIndexedAccess": true
+  },
+  "typeAcquisition": {
+    "exclude": ["dotenv"]
+  },
+
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
