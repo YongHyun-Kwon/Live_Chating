@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-nocheck
 
 // IIFE
 // 함수에 넣지 않으면 브라우저상에서 socket에 접근이 된다
@@ -14,12 +14,6 @@
   if (!formEl || !inputEl || !chatsEl) {
     throw new Error('Init failed.')
   }
-
-  /**
-   *  @typedef Chat
-   *  @property {string} nickname
-   *  @property {string} message
-   */
 
   /**
    * @type {Chat[]}
@@ -55,15 +49,26 @@
     inputEl.value = ''
   })
 
-  socket.addEventListener('message', (event) => {
-    chats.push(JSON.parse(event.data))
-
+  const drawChats = () => {
     chatsEl.innerHTML = ''
-
     chats.forEach(({ message, nickname }) => {
       const div = document.createElement('div')
       div.innerText = `${nickname}: ${message}`
       chatsEl.appendChild(div)
     })
+  }
+
+  socket.addEventListener('message', (event) => {
+    const { type, payload } = JSON.parse(event.data)
+
+    if (type === 'sync') {
+      const { chats: syncedChats } = payload
+      chats.push(...syncedChats)
+    } else if (type === 'chat') {
+      const chat = payload
+      chats.push(chat)
+    }
+
+    drawChats()
   })
 })()
